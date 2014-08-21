@@ -1,19 +1,19 @@
 #!/bin/sh
 
-# 以下の環境変数により、制御を変える
+# By the following environment variables, to change the control
 # ENV VOLUME_DATA /opt/data
 # ENV VOLUME_SNAP /opt/.snap
 # ENV SNAP_MAX 128
 # ENV SNAP_CRON 0 3 * * *
 
-# 指定された環境変数を元にcrontabを設定
-# 指定する引数は環境変数を元にする
+# Set the crontab based on the specified environment variable
+# Argument that you specify to the original environment variable
 echo "${SNAP_CRON} root /opt/snap.sh ${VOLUME_DATA} ${VOLUME_SNAP} ${SNAP_MAX}" >> /etc/crontab
 
-# cronの起動
-# プロセスID等は保存の必要がないため、起動するのみ
+# Starting the cron
+# Because there is no need for storage, process ID, etc. only to start
 cron
 
-# プロセスを殺さないようにする
+# I want to not to kill the process
 exec tail -f /dev/null
 

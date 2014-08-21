@@ -1,28 +1,28 @@
 docker-snap-volume
 ==================
 
-# ‚Í‚¶‚ß‚É
-docker‚É‚¨‚¯‚éVOLUMEƒRƒ“ƒeƒi‚Æsnapshot‚ğ‚Æ‚é‹@”\‚ğ’ñ‹Ÿ‚·‚éƒRƒ“ƒeƒi‚Å‚·B  
-snapshot‚É‚Írsync‚ğg—p‚µ‚Ä‚¨‚èA–³ˆ³k‚ÅƒRƒs[‚ªì¬‚³‚ê‚Ü‚·B‚½‚¾‚µA‘O‰ñ‚Ìsnapshot‚©‚ç·•ª‚ª‚È‚¢ƒtƒ@ƒCƒ‹‚Í‘O‰ñ‚Ìsnapshot‚É‘Î‚µ‚Äƒn[ƒhƒŠƒ“ƒN‚ªs‚í‚ê‚é‚½‚ßƒfƒBƒXƒNÁ”ï‚Í‚ ‚è‚Ü‚¹‚ñB  
-snapshot‚ÌƒfƒBƒŒƒNƒgƒŠŒ`®‚Í`@GMT-2014.08.01-00.00.00`‚Æ‚È‚è‚Ü‚·B
+# ã¯ã˜ã‚ã«
+dockerã«ãŠã‘ã‚‹VOLUMEã‚³ãƒ³ãƒ†ãƒŠã¨snapshotã‚’ã¨ã‚‹æ©Ÿèƒ½ã‚’æä¾›ã™ã‚‹ã‚³ãƒ³ãƒ†ãƒŠã§ã™ã€‚  
+snapshotã«ã¯rsyncã‚’ä½¿ç”¨ã—ã¦ãŠã‚Šã€ç„¡åœ§ç¸®ã§ã‚³ãƒ”ãƒ¼ãŒä½œæˆã•ã‚Œã¾ã™ã€‚ãŸã ã—ã€å‰å›ã®snapshotã‹ã‚‰å·®åˆ†ãŒãªã„ãƒ•ã‚¡ã‚¤ãƒ«ã¯å‰å›ã®snapshotã«å¯¾ã—ã¦ãƒãƒ¼ãƒ‰ãƒªãƒ³ã‚¯ãŒè¡Œã‚ã‚Œã‚‹ãŸã‚ãƒ‡ã‚£ã‚¹ã‚¯æ¶ˆè²»ã¯ã‚ã‚Šã¾ã›ã‚“ã€‚  
+snapshotã®ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªå½¢å¼ã¯`@GMT-2014.08.01-00.00.00`ã¨ãªã‚Šã¾ã™ã€‚
 
-snapshot‚ª•s—v‚Å‚ ‚éê‡‚ÍAsharaku/snap-volume‚ğg—p‚¹‚¸AƒVƒ“ƒvƒ‹‚ÈVOLUMEƒRƒ“ƒeƒi‚ğg—p‚µ‚Ü‚µ‚æ‚¤B
+snapshotãŒä¸è¦ã§ã‚ã‚‹å ´åˆã¯ã€sharaku/snap-volumeã‚’ä½¿ç”¨ã›ãšã€ã‚·ãƒ³ãƒ—ãƒ«ãªVOLUMEã‚³ãƒ³ãƒ†ãƒŠã‚’ä½¿ç”¨ã—ã¾ã—ã‚ˆã†ã€‚
 
-g‚¢•û
+ä½¿ã„æ–¹
 ------
 # Installation
-ˆÈ‰º‚Ì‚æ‚¤‚Édocker image‚ğpull‚µ‚Ü‚·B
+ä»¥ä¸‹ã®ã‚ˆã†ã«docker imageã‚’pullã—ã¾ã™ã€‚
 
     docker pull sharaku/snap-volume
 
-Docker image‚ğ©•ª‚Å\’z‚·‚é‚±‚Æ‚à‚Å‚«‚Ü‚·B
+Docker imageã‚’è‡ªåˆ†ã§æ§‹ç¯‰ã™ã‚‹ã“ã¨ã‚‚ã§ãã¾ã™ã€‚
 
     git clone https://github.com/sharaku/docker-snap-volume.git
     cd docker-snap-volume
     docker build --tag="$USER/snap-volume" .
 
 # Quick Start
-snap-volume‚Ìimage‚ğÀs‚µ‚Ü‚·B
+snap-volumeã®imageã‚’å®Ÿè¡Œã—ã¾ã™ã€‚
 
     docker run -d \
       --name example-vol \
@@ -31,34 +31,34 @@ snap-volume‚Ìimage‚ğÀs‚µ‚Ü‚·B
       -e "VOLUME_DATA=/path/to/container/data" -e "VOLUME_SNAP=/path/to/container/snap-vol" \
       -e "SNAP_MAX=128" -e "SNAP_CRON=0 3 * * *" sharaku/snap-volume
 
-snap-volume‚ğƒRƒ“ƒeƒi‚ÉŒöŠJ‚µ‚Ü‚·B
+snap-volumeã‚’ã‚³ãƒ³ãƒ†ãƒŠã«å…¬é–‹ã—ã¾ã™ã€‚
 
     docker run -d --volumes-from example-vol  docker-image
 
 ## Argument
 
 +   `-v /path/to/data:/path/to/container/data:rw` :  
-    ‰i‘±“I‚É•Û‘¶‚·‚éƒf[ƒ^‚ÌƒfƒBƒŒƒNƒgƒŠ‚ğw’è‚µ‚Ü‚·B
+    æ°¸ç¶šçš„ã«ä¿å­˜ã™ã‚‹ãƒ‡ãƒ¼ã‚¿ã®ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’æŒ‡å®šã—ã¾ã™ã€‚
  
 +   `-v /path/to/data:/path/to/container/snap-vol:rw` :  
-    snapshotÌææ‚ÉƒfƒBƒŒƒNƒgƒŠ‚ğw’è‚µ‚Ü‚·B
+    snapshotæ¡å–å…ˆã«ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’æŒ‡å®šã—ã¾ã™ã€‚
 
 +   `VOLUME_DATA"` :  
-    ‰i‘±“I‚É•Û‘¶‚·‚éƒf[ƒ^‚ÌƒfƒBƒŒƒNƒgƒŠ‚ğVOLUME_DATA‚Öİ’è‚µ‚Ä‚­‚¾‚³‚¢Bw’è‚µ‚È‚¢ê‡‚Í**/opt/data**‚ªg—p‚³‚ê‚Ü‚·B
+    æ°¸ç¶šçš„ã«ä¿å­˜ã™ã‚‹ãƒ‡ãƒ¼ã‚¿ã®ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’VOLUME_DATAã¸è¨­å®šã—ã¦ãã ã•ã„ã€‚æŒ‡å®šã—ãªã„å ´åˆã¯**/opt/data**ãŒä½¿ç”¨ã•ã‚Œã¾ã™ã€‚
 
 +   `VOLUME_SNAP` :  
-    snapshotÌææ‚ÉƒfƒBƒŒƒNƒgƒŠ‚ğVOLUME_SNAP‚Öİ’è‚µ‚Ä‚­‚¾‚³‚¢Bw’è‚µ‚È‚¢ê‡‚Í**/opt/.snap**‚ªg—p‚³‚ê‚Ü‚·B
+    snapshotæ¡å–å…ˆã«ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’VOLUME_SNAPã¸è¨­å®šã—ã¦ãã ã•ã„ã€‚æŒ‡å®šã—ãªã„å ´åˆã¯**/opt/.snap**ãŒä½¿ç”¨ã•ã‚Œã¾ã™ã€‚
 
 +   `SNAP_MAX` :  
-    snapshot‚Ì¢‘ã”‚ğw’è‚µ‚Ü‚·B‚±‚±‚Åw’è‚µ‚½ˆÈã‚Ìsnapshot‚Ííœ‚³‚ê‚Ü‚·Bw’è‚µ‚È‚¢ê‡‚Í**128**‚ªg—p‚³‚ê‚Ü‚·B
+    snapshotã®ä¸–ä»£æ•°ã‚’æŒ‡å®šã—ã¾ã™ã€‚ã“ã“ã§æŒ‡å®šã—ãŸä»¥ä¸Šã®snapshotã¯å‰Šé™¤ã•ã‚Œã¾ã™ã€‚æŒ‡å®šã—ãªã„å ´åˆã¯**128**ãŒä½¿ç”¨ã•ã‚Œã¾ã™ã€‚
 
 +   `SNAP_CRON` :  
-    snapshotÌæ‚ÌŠÔ‚ğw’è‚µ‚Ü‚·Bw’è‚Ícrontab‚Æ“¯ˆê‚Å‚·Bw’è‚µ‚È‚¢ê‡‚Í0 3 * * * (GMT 03:00)‚ªg—p‚³‚ê‚Ü‚·B
+    snapshotæ¡å–ã®æ™‚é–“ã‚’æŒ‡å®šã—ã¾ã™ã€‚æŒ‡å®šã¯crontabã¨åŒä¸€ã§ã™ã€‚æŒ‡å®šã—ãªã„å ´åˆã¯0 3 * * * (GMT 03:00)ãŒä½¿ç”¨ã•ã‚Œã¾ã™ã€‚
 
-—˜—p—á
+åˆ©ç”¨ä¾‹
 ------
 # mysql
-mysql‚Ìƒf[ƒ^‚ğƒzƒXƒg‚Ì/export/data/mysql‚Ö•Û‘¶‚µAsnapshot‚ğ/export/.snapshot/mysql‚ÖÌæ‚·‚é—á‚Å‚·B
+mysqlã®ãƒ‡ãƒ¼ã‚¿ã‚’ãƒ›ã‚¹ãƒˆã®/export/data/mysqlã¸ä¿å­˜ã—ã€snapshotã‚’/export/.snapshot/mysqlã¸æ¡å–ã™ã‚‹ä¾‹ã§ã™ã€‚
 
     docker run -d \
       --name mysql-vol \
@@ -72,7 +72,7 @@ mysql‚Ìƒf[ƒ^‚ğƒzƒXƒg‚Ì/export/data/mysql‚Ö•Û‘¶‚µAsnapshot‚ğ/export/.snapshot/m
       --volumes-from mysql-vol \
       -e "MYSQL_ROOT_PASSWORD=passwd" -p 3306:3306 mysql
 
-`-v /export/data/mysql:/var/lib/mysql:rw`‚ÍƒzƒXƒg‚Ì/export/data/mysqlƒfƒBƒŒƒNƒgƒŠ‚ğ/var/lib/mysql‚Æ‚µ‚Äw’è‚µ‚Ä‚¢‚Ü‚·B
-‚»‚ÌŒãA`--volumes-from mysql-vol`‚É‚ÄmysqlƒRƒ“ƒeƒi‚ÖŒöŠJ‚³‚ê‚Ü‚·B
+`-v /export/data/mysql:/var/lib/mysql:rw`ã¯ãƒ›ã‚¹ãƒˆã®/export/data/mysqlãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’/var/lib/mysqlã¨ã—ã¦æŒ‡å®šã—ã¦ã„ã¾ã™ã€‚
+ãã®å¾Œã€`--volumes-from mysql-vol`ã«ã¦mysqlã‚³ãƒ³ãƒ†ãƒŠã¸å…¬é–‹ã•ã‚Œã¾ã™ã€‚
 
-`-v /export/.snapshot/mysql:/opt/snap-vol:rw`‚Í/export/.snapshot/mysqlƒfƒBƒŒƒNƒgƒŠ‚ğsnapshotŠi”[æ‚Æ‚µ‚Äw’è‚µ‚Ä‚¢‚Ü‚·B‚±‚ÌƒfƒBƒŒƒNƒgƒŠ‚É‘Î‚µ‚ÄAsnapshot‚ªŠi”[‚³‚ê‚Ü‚·B
+`-v /export/.snapshot/mysql:/opt/snap-vol:rw`ã¯/export/.snapshot/mysqlãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã‚’snapshotæ ¼ç´å…ˆã¨ã—ã¦æŒ‡å®šã—ã¦ã„ã¾ã™ã€‚ã“ã®ãƒ‡ã‚£ãƒ¬ã‚¯ãƒˆãƒªã«å¯¾ã—ã¦ã€snapshotãŒæ ¼ç´ã•ã‚Œã¾ã™ã€‚
