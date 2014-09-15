@@ -1,0 +1,7 @@
+#!/bin/sh
+
+. ${SNAPSHOTCONF}
+
+# 環境変数を使用してsnapshotを採取する
+/opt/snap.sh ${VOLUME_DATA} ${VOLUME_SNAP} ${SNAP_MAX}
+

@@ -1,0 +1,36 @@
+#!/bin/sh
+
+. ${SNAPSHOTCONF}
+
+# -aオプション付きの場合は詳細表示を行う
+FLG_A=FALSE
+while getopts a OPT
+do
+  case $OPT in
+    "a" ) FLG_A="TRUE" ;;
+  esac
+done
+
+
+# 詳細表示の場合
+if [ ${FLG_A} != "FALSE" ]; then
+  echo "snapshot path:    ${VOLUME_SNAP}"
+  echo "data path:"
+  IFS=,
+  for i in $VOLUME_DATA
+  do
+    UNIQNAME=`echo ${i} | cut -d : -f1`
+    DATAPATH=`echo ${i} | cut -d : -f2`
+    echo "    ${DATAPATH} -> [snapshot path]/@GMT-YYYY.MM.DD-hh.mm.ss/${UNIQNAME}"
+  done
+  echo "cron setting:	  ${SNAP_CRON}"
+  echo "snapshot max:     ${SNAP_MAX}"
+fi
+
+# snapshot一覧を表示する
+echo "snapshot list:"
+CONT=1
+ls -1 ${VOLUME_SNAP}/snapshot/| grep "@GMT-" | while read line ; do
+  echo "    ${CONT}: ${line}"
+  CONT=`expr ${CONT} + 1`
+done

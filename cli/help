@@ -1,0 +1,8 @@
+#!/bin/sh
+
+echo "snap-volume cli help"
+echo "  help          : display the HELP."
+echo "  restore       : want to restore on the fly."
+echo "  show          : view information of snapshot."
+echo "  snapshot      : collect a snapshot on the fly."
+echo "  start         : start snapshot schedule."

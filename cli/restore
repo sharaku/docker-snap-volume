@@ -1,0 +1,20 @@
+#!/bin/sh
+
+. ${SNAPSHOTCONF}
+
+SNAPSHOT=$1
+
+# リストアする
+if [ -n `echo "VOLUME_DATA" | grep -n ','` ]; then
+  UNIQNAME=`echo ${VOLUME_DATA} | cut -d : -f1`
+  DATAPATH=`echo ${VOLUME_DATA} | cut -d : -f2`
+    rsync -a --delete ${VOLUME_SNAP}/snapshot/${SNAPSHOT}/${UNIQNAME}/ ${DATAPATH}
+else
+  IFS=,
+  for i in $VOLUME_DATA
+  do
+    UNIQNAME=`echo ${i} | cut -d : -f1`
+    DATAPATH=`echo ${i} | cut -d : -f2`
+    rsync -a --delete ${VOLUME_SNAP}/snapshot/${SNAPSHOT}/${UNIQNAME}/ ${DATAPATH}
+  done
+fi
